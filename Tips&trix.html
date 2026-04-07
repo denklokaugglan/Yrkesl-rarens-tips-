@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Råd till ny lärare</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --warm: #e8dfd0;
+    --clay: #c4956a;
+    --terracotta: #b5603a;
+    --forest: #3a5c4e;
+    --ink: #1e2d27;
+    --mist: #f9f6f1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--sand);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+  }
+
+  header {
+    background-color: var(--forest);
+    color: var(--sand);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 40px;
+    background: var(--sand);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .header-sub {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--mist);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.3s;
+  }
+
+  .tagline {
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.6);
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.5s;
+  }
+
+  main {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.55s ease forwards;
+  }
+
+  section:nth-child(1) { animation-delay: 0.5s; }
+  section:nth-child(2) { animation-delay: 0.65s; }
+  section:nth-child(3) { animation-delay: 0.8s; }
+  section:nth-child(4) { animation-delay: 0.95s; }
+  section:nth-child(5) { animation-delay: 1.05s; }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.4rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid var(--warm);
+  }
+
+  p { margin-bottom: 0.9rem; font-size: 1rem; color: #2e3d35; }
+  p:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 600; color: var(--forest); }
+
+  .card {
+    background: var(--mist);
+    border: 1px solid var(--warm);
+    border-radius: 10px;
+    padding: 1.1rem 1.5rem;
+    margin-bottom: 0.9rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 6px 20px rgba(58,92,78,0.1);
+    transform: translateY(-2px);
+  }
+
+  .card p { margin-bottom: 0; }
+
+  .tip-icon { font-size: 1.05rem; margin-right: 0.4rem; }
+
+  .sub-tip {
+    margin-top: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--warm);
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: #4a6057;
+    line-height: 1.65;
+  }
+
+  .steps {
+    counter-reset: steps;
+    list-style: none;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
+    color: #2e3d35;
+  }
+
+  .steps li::before {
+    content: counter(steps);
+    background: var(--forest);
+    color: var(--sand);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    min-width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--clay);
+    margin: 1.25rem 0;
+    padding: 0.75rem 1.25rem;
+    background: var(--warm);
+    border-radius: 0 6px 6px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--terracotta);
+  }
+
+  .book-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.9rem;
+  }
+
+  .book-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--forest);
+    color: var(--sand);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .book-link:hover { background: var(--terracotta); transform: translateY(-1px); }
+
+  .closing {
+    background: var(--forest);
+    color: var(--mist);
+    border-radius: 12px;
+    padding: 2.25rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.55s ease forwards 1.2s;
+  }
+
+  .closing p { color: rgba(249,246,241,0.8); margin-bottom: 0.5rem; }
+  .closing p:last-child { margin-bottom: 0; }
+
+  .closing .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--mist);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: rgba(30,45,39,0.4);
+    border-top: 1px solid var(--warm);
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="header-sub">Lena Skogholm · Kaj Pollak</p>
+  <h1>Råd till ny lärare</h1>
+  <p class="tagline">Från en ny yrkeslärare — råd som håller långsiktigt</p>
+</header>
+
+<main>
+
+  <section>
+    <span class="section-label">Börja här</span>
+    <h2>Lyssna & läs</h2>
+    <p>Lena Skogholm och Kaj Pollak ger djupare förståelse för ledarskap och kommunikation — och varför ett professionellt förhållningssätt skyddar dig och din relation till eleverna. Böcker, videos och poddar finns på:</p>
+    <div class="book-links">
+      <a class="book-link" href="https://open.spotify.com/search/Lena%20Skogholm" target="_blank">🎧 Spotify</a>
+      <a class="book-link" href="https://www.bookbeat.se/se/search?q=Lena+Skogholm" target="_blank">📖 BookBeat</a>
+      <a class="book-link" href="https://www.youtube.com/results?search_query=Lena+Skogholm+l%C3%A4rare" target="_blank">▶️ YouTube</a>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-label">1 · Grundinställning</span>
+    <h2>Ditt förhållningssätt</h2>
+    <div class="card">
+      <p><span class="tip-icon">🧭</span>Håll fokus på det professionella – undvik att dela dina egna känslor och reaktioner i klassrummet. Det skyddar dig och håller klimatet stabilt.</p>
+    </div>
+    <div class="card">
+      <p><span class="tip-icon">🗣️</span>Ge korta, tydliga kommandon från katedern. Bygg på med fler ord när stämning och dynamik tillåter. <strong>Undvik att förhandla.</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-label">2 · Planering</span>
+    <h2>Lektionsstruktur</h2>
+
+    <div class="card">
+      <p><span class="tip-icon">📋</span><strong>Börja alltid med en tydlig agenda</strong> synlig på tavlan eller digitalt – datum, tid och innehåll i tre steg.</p>
+      <div class="sub-tip">Använd <strong>Classroom Screen</strong> för timer med ljud och tystnadsymbol.</div>
+    </div>
+
+    <div class="card">
+      <p><span class="tip-icon">✍️</span><strong>Starta med en skriftlig uppgift direkt</strong> – lägg ut frågeställningar på bänkarna innan eleverna sätter sig. Arbetsro från första minuten.</p>
+    </div>
+
+    <div class="card">
+      <p><span class="tip-icon">🎬</span><strong>Håll genomgången kort.</strong> Spela in din PowerPoint i förväg eller använd flippat klassrum – du slipper bli avbruten och sliter inte ut rösten.</p>
+    </div>
+
+    <div class="card">
+      <p><span class="tip-icon">🔔</span><strong>Strukturmarkeringar håller ordningen:</strong></p>
+      <div class="sub-tip">
+        ✋ Hand upp i luften = tystnad begärs<br>
+        🎵 Starta lugn musik vid start eller avslut – tona ner när de tystnar<br>
+        💡 Dimma ner eller upp belysningen – fångar uppmärksamhet vid start och avslut
+      </div>
+    </div>
+
+    <div class="card">
+      <p><span class="tip-icon">⏱️</span><strong>Avrunda medvetet</strong> – "Dags att avsluta. Plocka undan. Kasta skräp, dra in stolen. Sätt upp stolen om sista lektion."</p>
+      <p style="margin-top:0.5rem; font-size:0.92rem; color:#4a6057;">Ge beröm om du får deras uppmärksamhet – annars avsluta lektionen. Diskutera inte frånvaro under lektionen, justera i efterhand.</p>
+    </div>
+
+    <div class="card" style="border-color: var(--clay); background: #fdf7f2;">
+      <p><span class="tip-icon">🌱</span><em>Ge strukturen tid. Jag är själv där och långt ifrån klar – men ser tydliga framgångsfaktorer i detta koncept.</em></p>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-label">3 · Metoder</span>
+    <h2>Aktiviteter som fungerar</h2>
+
+    <div class="card">
+      <p><span class="tip-icon">🔄</span>Använd <strong>EPA</strong> (Enskilt – Par – Alla) kopplat till uppgiften med individuell inlämning. Diskutera frågorna före eller efter.</p>
+    </div>
+
+    <div class="card">
+      <p><span class="tip-icon">🎫</span>Komplettera med <strong>exit ticket</strong> via postit, whiteboard eller Mentimeter – par eller enskilt. Några får berätta (stickprov).</p>
+    </div>
+
+    <div class="card">
+      <p><span class="tip-icon">📚</span>Välj <strong>fysisk litteratur</strong> framför digitalt när det går – eleverna är redan kognitivt belastade av skärmar.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-label">4 · Klassrumsledarskap</span>
+    <h2>Olämpligt beteende – tre steg</h2>
+
+    <ol class="steps">
+      <li><strong>Kort, tydlig vägledning</strong> – ge eleven ett konkret uppdrag (dela ut papper, läs högt)</li>
+      <li><strong>Påminn om sista chansen</strong></li>
+      <li><strong>Avisera från lektionen</strong></li>
+    </ol>
+
+    <blockquote>"Det där är noll tolerans i mitt klassrum." — och sedan punkt. (Tack och hej.)</blockquote>
+
+    <p>Undvik hot du inte kan följa upp. Om eleven vägrar lämna – bedöm situationen utifrån hur det påverkar övriga klassen.</p>
+  </section>
+
+  <div class="closing">
+    <p class="big">Att bygga relationer tar tid.</p>
+    <p>Den tiden saknas under VFU — men investeringen lönar sig. Ge strukturen tid och lita på processen.</p>
+    <p style="margin-top:1rem; font-size:1rem; color: var(--clay);">Lycka till! 🌿</p>
+  </div>
+
+</main>
+
+<footer>
+  Råd från en ny yrkeslärare · 3 månaders erfarenhet · Inspirerat av Lena Skogholm &amp; Kaj Pollak
+</footer>
+
+</body>
+</html>
